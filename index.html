@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio | Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Ayam Joanna</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#planner">Planner</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero" id="home">
+            <img src="assets/Snapchat-381478191.jpg" alt="Ayam Joanna" class="profile-img">
+            <div class="hero-text">
+                <h2>Welcome to My Academic Portfolio</h2>
+                <p>Computer Science Student | Web Development Enthusiast</p>
+                <a href="#projects" class="btn">View My Work</a>
+            </div>
+        </section>
+
+        <section class="card" id="about">
+            <h2>About My Journey</h2>
+            <p>
+                Hello! I am Ayam Joanna, a dedicated Computer Science undergraduate at MIVA Open University.
+                This platform showcases my academic achievements, technical projects, and interactive tools designed to streamline student productivity.
+            </p>
+
+            <h3>Educational Background</h3>
+            <ul class="styled-list">
+                <li><strong>B.Sc. Computer Science</strong> – MIVA Open University (2025 – Present)</li>
+                <li><strong>High School Diploma</strong> – West High School (Graduated 2024)</li>
+            </ul>
+
+            <h3>Technical Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4>HTML5 & CSS3</h4>
+                    <p>Semantic markup, Flexbox, Grid, Responsive Web Design</p>
+                </div>
+                <div class="skill-card">
+                    <h4>JavaScript (ES6+)</h4>
+                    <p>DOM Manipulation, Event Handling, Client-side Form Validation</p>
+                </div>
+                <div class="skill-card">
+                    <h4>Git & GitHub</h4>
+                    <p>Version Control, Branching, Project Collaboration</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Current Course Schedule</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Title</th>
+                            <th>Instructor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>COS 106</td>
+                            <td>Introduction to Web Technologies</td>
+                            <td>Dr. Smith</td>
+                            <td>In Progress</td>
+                        </tr>
+                        <tr>
+                            <td>COS 101</td>
+                            <td>Introduction to Computer Science</td>
+                            <td>Prof. Davies</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>MAT 102</td>
+                            <td>Discrete Mathematics</td>
+                            <td>Dr. Adams</td>
+                            <td>In Progress</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card" id="projects">
+            <h2>My Featured Projects</h2>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div style="height: 180px; background: linear-gradient(135deg, #2b6cb0, #15488f); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">Grade Calculator</div>
+                    <div class="project-content">
+                        <h3>Student Grade Calculator</h3>
+                        <p>A web application built using HTML, CSS, and JavaScript that calculates GPA based on entered credit hours and scores.</p>
+                        <a href="#" class="btn btn-small">View Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div style="height: 180px; background: linear-gradient(135deg, #319795, #15488f); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">Dashboard UI</div>
+                    <div class="project-content">
+                        <h3>E-Learning Dashboard UI</h3>
+                        <p>A responsive dashboard interface designed using CSS Grid and Flexbox for cross-device compatibility.</p>
+                        <a href="#" class="btn btn-small">View Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div style="height: 180px; background: linear-gradient(135deg, #38a169, #2b6cb0); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">Quiz App</div>
+                    <div class="project-content">
+                        <h3>Interactive Quiz Application</h3>
+                        <p>A JavaScript-powered quiz app with score tracking, countdowns, and dynamic updates.</p>
+                        <a href="#" class="btn btn-small">View Project</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="card" id="planner">
+            <h2>Academic Planner</h2>
+            <form id="task-form" class="planner-form">
+                <input id="task-input" type="text" placeholder="Add a study task..." aria-label="Add study task">
+                <button type="submit" class="btn btn-small">Add Task</button>
+            </form>
+            <ul id="task-list" class="task-list"></ul>
+        </section>
+
+        <section class="card">
+            <h2>Featured Audio Introduction</h2>
+            <audio controls>
+                <source src="assets/welcome-audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </section>
+    </main>
+
+    <footer>
+    
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskForm = document.getElementById('task-form');
+            const taskInput = document.getElementById('task-input');
+            const taskList = document.getElementById('task-list');
+
+            if (!taskForm || !taskInput || !taskList) {
+                return;
+            }
+
+            let tasks = [];
+
+            function renderTasks() {
+                taskList.innerHTML = '';
+
+                tasks.forEach((task) => {
+                    const li = document.createElement('li');
+                    li.className = `task-item ${task.completed ? 'completed' : ''}`;
+
+                    const text = document.createElement('span');
+                    text.textContent = task.text;
+
+                    const actions = document.createElement('div');
+                    actions.className = 'task-actions';
+
+                    const toggleButton = document.createElement('button');
+                    toggleButton.type = 'button';
+                    toggleButton.className = 'btn-complete';
+                    toggleButton.textContent = task.completed ? 'Undo' : 'Complete';
+                    toggleButton.addEventListener('click', () => {
+                        tasks = tasks.map((item) => item.id === task.id ? { ...item, completed: !item.completed } : item);
+                        renderTasks();
+                    });
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.type = 'button';
+                    deleteButton.className = 'btn-delete';
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.addEventListener('click', () => {
+                        tasks = tasks.filter((item) => item.id !== task.id);
+                        renderTasks();
+                    });
+
+                    actions.append(toggleButton, deleteButton);
+                    li.append(text, actions);
+                    taskList.appendChild(li);
+                });
+            }
+
+            taskForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const value = taskInput.value.trim();
+
+                if (!value) {
+                    return;
+                }
+
+                tasks.push({
+                    id: Date.now() + Math.random(),
+                    text: value,
+                    completed: false
+                });
+
+                taskInput.value = '';
+                renderTasks();
+            });
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="card form-container">
+            <h2>Get In Touch</h2>
+            <div id="error-message" class="error-box" style="display: none;"></div>
+            <div id="success-message" class="success-box" style="display: none;"></div>
+
+            <form id="contact-form" novalidate>
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" placeholder="e.g. 08012345678">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        
+    </footer>
+
+    <script src="js/contact.js"></script>
+</body>
+</html>

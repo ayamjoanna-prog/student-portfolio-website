@@ -1,0 +1,81 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const taskForm = document.getElementById('task-form');
+    const taskInput = document.getElementById('task-input');
+    const taskList = document.getElementById('task-list');
+
+    if (!taskForm || !taskInput || !taskList) {
+        return;
+    }
+
+    let tasks = [];
+
+    function addTask(text) {
+        const taskText = text.trim();
+
+        if (!taskText) {
+            return;
+        }
+
+        tasks.push({
+            id: Date.now() + Math.random(),
+            text: taskText,
+            completed: false,
+        });
+        renderTasks();
+    }
+
+    function renderTasks() {
+        taskList.innerHTML = '';
+
+        tasks.forEach((task) => {
+            const li = document.createElement('li');
+            li.className = `task-item ${task.completed ? 'completed' : ''}`;
+
+            const taskText = document.createElement('span');
+            taskText.textContent = task.text;
+
+            const actions = document.createElement('div');
+            actions.className = 'task-actions';
+
+            const toggleButton = document.createElement('button');
+            toggleButton.type = 'button';
+            toggleButton.className = 'btn-complete';
+            toggleButton.textContent = task.completed ? 'Undo' : 'Complete';
+            toggleButton.addEventListener('click', () => toggleTask(task.id));
+
+            const deleteButton = document.createElement('button');
+            deleteButton.type = 'button';
+            deleteButton.className = 'btn-delete';
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => deleteTask(task.id));
+
+            actions.append(toggleButton, deleteButton);
+            li.append(taskText, actions);
+            taskList.appendChild(li);
+        });
+    }
+
+    function toggleTask(id) {
+        tasks = tasks.map((task) => {
+            if (task.id === id) {
+                return { ...task, completed: !task.completed };
+            }
+            return task;
+        });
+        renderTasks();
+    }
+
+    function deleteTask(id) {
+        tasks = tasks.filter((task) => task.id !== id);
+        renderTasks();
+    }
+
+    taskForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        addTask(taskInput.value);
+        taskInput.value = '';
+    });
+
+    window.toggleTask = toggleTask;
+    window.deleteTask = deleteTask;
+});
